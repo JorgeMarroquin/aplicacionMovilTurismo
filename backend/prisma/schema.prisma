@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Test {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+}
+
+model Usuarios {
+  id Int @id @default(autoincrement())
+  nombre String
+  apellido String
+  correo String @unique
+  nacionalidad String
+  telefono String
+  password String
+  lugaresFavoritos LugaresFavoritos[]
+}
+
+model Lugares{
+  id Int @id @default(autoincrement())
+  nombre String
+  tipoLugar TipoLugar
+  departamento String
+  latitud Float
+  longitud Float
+  imagen String
+  calificacion Float @default(0)
+  lugaresFavoritos LugaresFavoritos[]
+}
+
+model LugaresFavoritos{
+  lugar Lugares @relation(fields: [lugarId], references: [id]) 
+  lugarId Int
+  usuario Usuarios @relation(fields: [usuarioId], references: [id])
+  usuarioId Int
+  @@unique([lugarId, usuarioId])
+}
+
+enum TipoLugar{
+  RESTAURANTE
+  TURISTICO
+}

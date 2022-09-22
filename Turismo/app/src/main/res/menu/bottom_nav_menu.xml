@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Lugares"
+        android:icon="@drawable/ic_baseline_place_24"
+        android:id="@+id/turisticos"/>
+    <item android:title="Restaurantes"
+        android:icon="@drawable/ic_baseline_food_bank"
+        android:id="@+id/restaurantes"/>
+    <item android:title="Favoritos"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:id="@+id/favoritos"/>
+    <item android:title="Perfil"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:id="@+id/perfil"/>
+</menu>

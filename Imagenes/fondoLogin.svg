@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="407.43573mm"
+   height="825.99268mm"
+   viewBox="0 0 407.43573 825.99268"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath20849">
+      <ellipse
+         style="fill:#2b00ff;fill-opacity:1;stroke:none;stroke-width:0.828484;stroke-miterlimit:4;stroke-dasharray:none"
+         id="ellipse20851"
+         cx="456.18097"
+         cy="-218.0986"
+         rx="181.23204"
+         ry="101.64153" />
+    </clipPath>
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-15.414376,263.4627)">
+    <rect
+       style="fill:#323a51;fill-opacity:1;stroke:none;stroke-width:1.44699"
+       id="rect38818-0"
+       width="407.43567"
+       height="825.99268"
+       x="15.414448"
+       y="-263.46268" />
+    <rect
+       style="fill:#00a3e0;fill-opacity:1;stroke:none;stroke-width:0.631912"
+       id="rect38820"
+       width="189.86809"
+       height="338.03476"
+       x="287.32974"
+       y="-247.61092"
+       clip-path="url(#clipPath20849)"
+       transform="matrix(2.145888,0,0,2.0724223,-601.16307,249.69168)" />
+  </g>
+</svg>

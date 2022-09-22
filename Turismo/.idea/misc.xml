@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/ic_account_box_24.xml" value="0.193" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/ic_account_circle_24.xml" value="0.193" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.1" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/ic_baseline_favorite_border_45.xml" value="0.137" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/login_email.xml" value="0.275" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/login_password.xml" value="0.275" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/activity_application.xml" value="0.264" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/activity_lugar_detalle.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/activity_registro.xml" value="0.536" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/fragment_lugar.xml" value="0.1" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/fragment_restaurant.xml" value="0.264" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/item_place.xml" value="0.264" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

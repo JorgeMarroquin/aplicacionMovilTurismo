@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Turismo</string>
+    <string name="log_in">Log In</string>
+    <string name="correoLogin">Correo</string>
+    <string name="passwordLogin">Contraseña</string>
+    <string name="login_logo_description">Login logo</string>
+    <string name="texto_registro">No tienes una cuenta?</string>
+    <string name="regsitro">Regsitrate</string>
+    <string name="ingresar_button">Ingresar</string>
+    <string name="register_name">Nombre</string>
+    <string-array name="sortTypes">
+        <item>A->Z</item>
+        <item>Z->A</item>
+        <item>Mayor popularidad</item>
+        <item>Menor pupularidad</item>
+        <item>Departamento A->Z</item>
+        <item>Departamento Z->A</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
