@@ -1,28 +1,47 @@
 package com.example.turismo.models;
 
 import java.util.Comparator;
+import java.util.Date;
 
 public class Lugar {
-    private int Id;
-    private String nombre = "SIUUU";
+    private int id;
+    private String nombre;
+    private String descripcion;
     private TipoLugar tipoLugar;
-    private String departamento = "guate";
+    private String departamento;
     private Float latitud;
     private Float longitud;
     private String imagen;
     private Float calificacion;
+    private Boolean isFavorite = false;
+    private Date visitaFecha;
 
     public Lugar() {}
 
-    public Lugar(int id, String nombre, TipoLugar tipoLugar, String departamento, Float latitud, Float longitud, String imagen, Float calificacion) {
-        Id = id;
+    public Lugar(int id, String nombre, String descripcion, TipoLugar tipoLugar, String departamento, Float latitud, Float longitud, String imagen, Float calificacion) {
+        this.id = id;
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.tipoLugar = tipoLugar;
         this.departamento = departamento;
         this.latitud = latitud;
         this.longitud = longitud;
         this.imagen = imagen;
         this.calificacion = calificacion;
+    }
+
+    public Lugar(int id, String nombre, String descripcion, TipoLugar tipoLugar, String departamento, Float latitud, Float longitud, String imagen, Float calificacion, Boolean isFavorite, Date visitaFecha) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipoLugar = tipoLugar;
+        this.departamento = departamento;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.imagen = imagen;
+        this.calificacion = calificacion;
+        this.isFavorite = isFavorite;
+        this.visitaFecha = visitaFecha;
     }
 
     public static Comparator<Lugar> nameAZComparator = new Comparator<Lugar>() {
@@ -70,11 +89,11 @@ public class Lugar {
 
 
     public int getId() {
-        return Id;
+        return this.id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNombre() {
@@ -131,5 +150,25 @@ public class Lugar {
 
     public void setCalificacion(Float calificacion) {
         this.calificacion = calificacion;
+    }
+
+    public Boolean getFavorite() { return isFavorite; }
+
+    public void setFavorite(Boolean favorite) { isFavorite = favorite; }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Date getVisitaFecha() {
+        return visitaFecha;
+    }
+
+    public void setVisitaFecha(Date visitaFecha) {
+        this.visitaFecha = visitaFecha;
     }
 }

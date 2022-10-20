@@ -25,11 +25,15 @@ model Usuarios {
   telefono String
   password String
   lugaresFavoritos LugaresFavoritos[]
+  comentarios Comentarios[]
+  scores Scores[]
+  visicas Visitas[]
 }
 
 model Lugares{
   id Int @id @default(autoincrement())
   nombre String
+  descripcion String? @db.LongText
   tipoLugar TipoLugar
   departamento String
   latitud Float
@@ -37,6 +41,9 @@ model Lugares{
   imagen String
   calificacion Float @default(0)
   lugaresFavoritos LugaresFavoritos[]
+  comentarios Comentarios[]
+  scores Scores[]
+  visitas Visitas[]
 }
 
 model LugaresFavoritos{
@@ -44,6 +51,34 @@ model LugaresFavoritos{
   lugarId Int
   usuario Usuarios @relation(fields: [usuarioId], references: [id])
   usuarioId Int
+  @@unique([lugarId, usuarioId])
+}
+
+model Scores{
+  lugar Lugares @relation(fields: [lugarId], references: [id]) 
+  lugarId Int
+  usuario Usuarios @relation(fields: [usuarioId], references: [id])
+  usuarioId Int
+  score Float
+  @@unique([lugarId, usuarioId])
+}
+
+model Comentarios{
+  id Int @id @default(autoincrement())
+  usuario Usuarios @relation(fields: [usuarioId], references: [id])
+  usuarioId Int
+  lugar Lugares @relation(fields: [lugarId], references: [id]) 
+  lugarId Int
+  fecha DateTime
+  comentario String @db.LongText
+}
+
+model Visitas{
+  lugar Lugares @relation(fields: [lugarId], references: [id]) 
+  lugarId Int
+  usuario Usuarios @relation(fields: [usuarioId], references: [id])
+  usuarioId Int
+  visitaFecha DateTime
   @@unique([lugarId, usuarioId])
 }
 

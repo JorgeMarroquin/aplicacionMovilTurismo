@@ -10,4 +10,5 @@
     <color name="gray">#808080</color>
     <color name="celeste">#00a3e0</color>
     <color name="fondo_base">#323a51</color>
+    <color name="negro_transparente">#A6000000</color>
 </resources>

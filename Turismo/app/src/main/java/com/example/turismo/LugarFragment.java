@@ -1,8 +1,12 @@
 package com.example.turismo;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,9 +38,10 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
     private List<Lugar> mLugares;
     private LugaresAPI mApi;
     private LugarAdapter adapter;
-
-    private static final String ARG_PARAM1 = "param1";
     private String typePlaceQuery;
+    private boolean isFavorito = false;
+    private SharedPreferences sharedPreferences;
+    private int userid;
 
     public LugarFragment() {}
 
@@ -44,28 +49,20 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
         this.typePlaceQuery = type;
     }
 
-    public static LugarFragment newInstance(String param1) {
-        LugarFragment fragment = new LugarFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
+    public LugarFragment(String type, boolean isFavorito) {
+        this.typePlaceQuery = type;
+        this.isFavorito = isFavorito;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            typePlaceQuery = getArguments().getString(ARG_PARAM1);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         binding = FragmentLugarBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        sharedPreferences = getActivity().getSharedPreferences(getString(R.string.SHARED_PREFS_TURISMO), Context.MODE_PRIVATE);
+        userid = sharedPreferences.getInt(getString(R.string.USER_KEY), -1);
 
         ArrayAdapter<CharSequence> dropdownAdapter = ArrayAdapter.createFromResource(view.getContext(), R.array.sortTypes, android.R.layout.simple_spinner_item);
         binding.sortList.setAdapter(dropdownAdapter);
@@ -73,28 +70,60 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
 
         RecyclerView rvContacts = binding.lugaresList;
 
-        adapter = new LugarAdapter(new ArrayList<>());
+        adapter = new LugarAdapter(new ArrayList<>(), isFavorito);
         rvContacts.setAdapter(adapter);
         rvContacts.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter.reloadData(new ArrayList<>());
-        Call<List<Lugar>> lugarCall = mApi.getLugares(typePlaceQuery);
-        lugarCall.enqueue(new Callback<List<Lugar>>() {
-            @Override
-            public void onResponse(Call<List<Lugar>> call, Response<List<Lugar>> response) {
-                mLugares = response.body();
-                adapter.reloadData(mLugares);
-            }
+        loadLugares();
 
-            @Override
-            public void onFailure(Call<List<Lugar>> call, Throwable t) {
-                Toast.makeText(view.getContext(), "Error al obtener los restaurantes", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        binding.closeSessionButton.setOnClickListener(view1 -> closeSession());
         binding.searchField.setOnQueryTextListener(this);
         binding.sortList.setOnItemSelectedListener(this);
 
         return view;
+    }
+
+    public void goToTop(){
+        binding.lugaresList.scrollToPosition(0);
+    }
+
+    private void getLugares(Call<List<Lugar>> lugarCall){
+        lugarCall.enqueue(new Callback<List<Lugar>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Lugar>> call, @NonNull Response<List<Lugar>> response) {
+                mLugares = response.body();
+                adapter.reloadData(mLugares);
+            }
+            @Override
+            public void onFailure(@NonNull Call<List<Lugar>> call, @NonNull Throwable t) {
+                Toast.makeText(binding.getRoot().getContext(), "Error al obtener los lugares", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void loadLugares(){
+        if(isFavorito){
+            getLugares(mApi.getUserFavorites(typePlaceQuery, userid));
+        }else {
+            getLugares(mApi.getLugares(typePlaceQuery, userid));
+        }
+
+    }
+
+    private void closeSession(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        Intent i = new Intent(binding.getRoot().getContext(), MainActivity.class);
+        startActivity(i);
+        getActivity().finish();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        loadLugares();
+        binding.sortList.setSelection(0);
     }
 
     @Override
@@ -119,6 +148,8 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         adapter.sortOptions(i);
+        binding.lugaresList.scrollToPosition(0);
+
     }
 
     @Override
