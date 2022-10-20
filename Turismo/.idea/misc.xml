@@ -6,17 +6,28 @@
         <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/ic_account_box_24.xml" value="0.193" />
         <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/ic_account_circle_24.xml" value="0.193" />
         <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.1" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/ic_baseline_favorite_border_35.xml" value="0.221" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/ic_baseline_favorite_border_40.xml" value="0.2085" />
         <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/ic_baseline_favorite_border_45.xml" value="0.137" />
         <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/login_email.xml" value="0.275" />
         <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/drawable/login_password.xml" value="0.275" />
         <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/activity_application.xml" value="0.264" />
         <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/activity_lugar_detalle.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/activity_registro.xml" value="0.536" />
-        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/fragment_lugar.xml" value="0.1" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/activity_main_descripcion.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/activity_registro.xml" value="0.4" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/dialog.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/dialogMessage.xml" value="0.264" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/dialog_message.xml" value="0.4" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/fragment_comment.xml" value="0.264" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/fragment_description.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/fragment_favorites.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/fragment_lugar.xml" value="0.4" />
         <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/fragment_restaurant.xml" value="0.264" />
-        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/item_place.xml" value="0.264" />
-        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/item_comment.xml" value="0.264" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/layout/item_place.xml" value="0.4" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/menu/bottom_nav_descripcion.xml" value="0.2734375" />
+        <entry key="..\:/Users/jorge/Documents/aplicacionMovilTurismo/Turismo/app/src/main/res/menu/bottom_nav_menu.xml" value="0.264" />
       </map>
     </option>
   </component>

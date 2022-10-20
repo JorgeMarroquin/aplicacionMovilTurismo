@@ -15,7 +15,12 @@
         <item>Menor pupularidad</item>
         <item>Departamento A->Z</item>
         <item>Departamento Z->A</item>
+        <item>Fecha de visita</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="SHARED_PREFS_TURISMO">shared_prefs_turismo</string>
+    <string name="USER_KEY">user_key</string>
+    <string name="EMAIL_KEY">email_key</string>
 </resources>

@@ -19,45 +19,48 @@
         android:textColor="@color/white"
         android:textSize="35sp" />
 
-    <EditText
-        android:id="@+id/name"
-        android:inputType="text"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/name_container"
         android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
         app:layout_constraintTop_toBottomOf="@id/titleRegister"
         app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/white"
-        android:hint="@string/register_name"
-        android:textColorHint="@color/gray"
-        android:layout_marginTop="15dp"
         android:layout_marginHorizontal="20dp"
-        android:padding="20dp"
-        android:drawableStart="@drawable/ic_account_circle_24"
-        android:drawablePadding="7dp"/>
-
-    <EditText
-        android:id="@+id/last_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:layout_marginHorizontal="20dp"
-        android:autofillHints=""
-        android:hint="Apellido"
-        android:inputType="text"
-        android:padding="20dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/gray"
-        app:layout_constraintStart_toEndOf="@id/name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleRegister"
-        tools:ignore="TextContrastCheck" />
+        >
+        <EditText
+            android:id="@+id/name"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:hint="@string/register_name"
+            android:textColorHint="@color/gray"
+            android:drawableStart="@drawable/ic_account_circle_24"
+            android:drawablePadding="7dp"
+            android:padding="15dp"
+            android:layout_weight="1"/>
+        <EditText
+            android:id="@+id/last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="Apellido"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
+            tools:ignore="TextContrastCheck"
+            android:padding="15dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
     <EditText
         android:id="@+id/email"
         android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/name_container"
         app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/white"
         android:hint="@string/correoLogin"
@@ -72,6 +75,7 @@
         android:id="@+id/country"
         android:layout_marginTop="15dp"
         android:layout_marginHorizontal="20dp"
+        android:paddingStart="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,13 +85,13 @@
         app:ccp_showNameCode="false"
         app:ccp_autoDetectLanguage="true"
         app:ccp_defaultNameCode="GT"
-
         app:ccp_textGravity="LEFT"
         app:ccp_contentColor="@color/white"/>
 
     <EditText
         android:id="@+id/phone"
-        android:inputType="text"
+        android:inputType="phone"
+        android:digits="0123456789"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/country"
@@ -133,7 +137,7 @@
         android:drawableStart="@drawable/ic_check_24"
         android:drawablePadding="7dp"/>
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/button_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -146,8 +150,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/verify"
-        tools:ignore="TextContrastCheck" />
+        app:layout_constraintTop_toBottomOf="@id/verify" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

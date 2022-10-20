@@ -1,6 +1,8 @@
 package com.example.turismo.models;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
     private int id;
     private String nombre;
     private String apellido;

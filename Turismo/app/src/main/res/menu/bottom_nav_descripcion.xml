@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Descripción"
+        android:icon="@drawable/ic_baseline_description_24"
+        android:id="@+id/lugar_descripcion_button"/>
+    <item android:title="Comentarios"
+        android:icon="@drawable/ic_baseline_comment_24"
+        android:id="@+id/lugar_comentarios_button"/>
+</menu>
