@@ -44,6 +44,11 @@ public class Application extends AppCompatActivity {
                 case R.id.favoritos:
                     replaceFragment(new FavoritesFragment());
                     break;
+                case R.id.perfil:
+                    if(item.getItemId() != navOptionSelected) {
+                        replaceFragment(new PerfilFragment());
+                    }
+                    break;
 
             }
             navOptionSelected = item.getItemId();

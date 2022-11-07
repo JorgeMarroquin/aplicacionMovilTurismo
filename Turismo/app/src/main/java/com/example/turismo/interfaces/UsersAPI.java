@@ -14,4 +14,7 @@ public interface UsersAPI {
 
     @GET("login/{email}/{password}")
     Call<Usuario> requestLogin(@Path("email") String email, @Path("password") String password);
+
+    @GET("getUserById/{userId}")
+    Call<Usuario> getUserById(@Path("userId") int userId);
 }

@@ -76,7 +76,6 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
         adapter.reloadData(new ArrayList<>());
         loadLugares();
 
-        binding.closeSessionButton.setOnClickListener(view1 -> closeSession());
         binding.searchField.setOnQueryTextListener(this);
         binding.sortList.setOnItemSelectedListener(this);
 
@@ -108,15 +107,6 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
             getLugares(mApi.getLugares(typePlaceQuery, userid));
         }
 
-    }
-
-    private void closeSession(){
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-        Intent i = new Intent(binding.getRoot().getContext(), MainActivity.class);
-        startActivity(i);
-        getActivity().finish();
     }
 
     @Override

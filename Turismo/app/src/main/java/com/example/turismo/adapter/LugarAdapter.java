@@ -1,5 +1,6 @@
 package com.example.turismo.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,7 +25,6 @@ import com.example.turismo.models.Lugar;
 import com.example.turismo.models.Message;
 import com.example.turismo.tools.CustomDateFormat;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -100,8 +100,17 @@ public class LugarAdapter extends RecyclerView.Adapter<LugarAdapter.ViewHolder> 
         ImageView lugarImagen = holder.mLugarImage;
         Glide.with(this.context).load(lugar.getImagen()).into(lugarImagen);
         holder.mFavorite.setOnClickListener(View -> {
+            int tempPosition = position;
             if (lugar.getFavorite()){
-                onChangeFav(mApi.deleteFav(lugar.getId(), userid), position);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
+                builder.setCancelable(true);
+                builder.setTitle("Eliminar de favoritos");
+                builder.setMessage("Desea eliminar de favoritos?");
+                builder.setPositiveButton("Eliminar",
+                        (dialog, which) -> onChangeFav(mApi.deleteFav(lugar.getId(), userid), tempPosition));
+                builder.setNegativeButton("Cancelar", (dialog, which) -> {});
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }else{
                 onChangeFav(mApi.saveFav(lugar.getId(), userid), position);
             }

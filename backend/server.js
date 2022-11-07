@@ -98,6 +98,23 @@ app.get("/getUserById/:id", async(req, res) => {
     res.json(result)
 })
 
+app.put(`/updateUser/:id`, async(req, res)=>{
+    try{
+        const {id} = req.params
+        const {nombre, apellido, correo, nacionalidad, telefono} = req.body
+        const post = await prisma.usuarios.update({
+            where: {id: Number(id)},
+            data: {nombre, apellido, correo, nacionalidad, telefono}
+        })
+        res.json(post)
+
+    }catch{
+        res.status(409)
+        res.send(null)
+    }
+    
+})
+
 //LUGARES
 app.get("/getLugares/:tipo/:user", async(req, res) => {
     let params = req.params

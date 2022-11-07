@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         if (mEmail != null && userId != -1) {
             Intent i = new Intent(MainActivity.this, Application.class);
             startActivity(i);
+            finish();
         }
     }
 

@@ -1,6 +1,8 @@
 package com.example.turismo.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +73,25 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             holder.mDelete.setVisibility(View.INVISIBLE);
         }
         holder.mDelete.setOnClickListener(v -> {
-            deleteComment(comment.getId(), position);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
+            builder.setCancelable(true);
+            builder.setTitle("Eliminar comentario");
+            builder.setMessage("Deseas eliminar este comentario?");
+            builder.setPositiveButton("Eliminar",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            deleteComment(comment.getId(), position);
+                        }
+                    });
+            builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
         });
     }
 
