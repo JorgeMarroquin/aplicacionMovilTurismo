@@ -39,4 +39,25 @@ public class PerfilModel implements IPerfilModel{
             }
         });
     }
+
+    @Override
+    public void saveUser(Usuario usuario) {
+        Call<Usuario> usuarioCall = api.updateUser(usuario);
+        usuarioCall.enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                if (response.isSuccessful()){
+                    presenter.onSaveUserSuccess(response.body());
+                }else{
+                    presenter.onSaveUserError("El correo ya existe");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                presenter.onSaveUserError("Error al guardar");
+            }
+        });
+    }
 }

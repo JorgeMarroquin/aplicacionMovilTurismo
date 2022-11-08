@@ -11,4 +11,8 @@ public interface IPerfilPresenter {
     void getUser(int userid);
     void onUserSuccess(Usuario usuario);
     void onUserError(String msg);
+
+    void saveUser(Usuario usuario);
+    void onSaveUserSuccess(Usuario usuario);
+    void onSaveUserError(String msg);
 }

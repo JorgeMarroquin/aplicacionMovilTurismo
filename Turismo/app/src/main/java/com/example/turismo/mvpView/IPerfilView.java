@@ -8,4 +8,7 @@ public interface IPerfilView {
 
     void onUserSuccess(Usuario usuario);
     void onUserError(String msg);
+
+    void onSaveUserSuccess(Usuario usuario);
+    void onSaveUserError(String msg);
 }

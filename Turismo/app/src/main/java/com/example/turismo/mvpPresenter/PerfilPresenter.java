@@ -39,4 +39,25 @@ public class PerfilPresenter implements IPerfilPresenter{
         this.view.onUserError(msg);
     }
 
+    @Override
+    public void saveUser(Usuario usuario) {
+        this.model.saveUser(usuario);
+    }
+
+    @Override
+    public void onSaveUserSuccess(Usuario usuario) {
+        if (view == null)
+            return;
+
+        this.view.onSaveUserSuccess(usuario);
+    }
+
+    @Override
+    public void onSaveUserError(String msg) {
+        if (view == null)
+            return;
+
+        this.view.onSaveUserError(msg);
+    }
+
 }

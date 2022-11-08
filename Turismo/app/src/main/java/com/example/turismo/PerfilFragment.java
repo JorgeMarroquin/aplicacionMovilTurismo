@@ -41,11 +41,14 @@ public class PerfilFragment extends Fragment implements IPerfilView {
         sharedPreferences = getActivity().getSharedPreferences(getString(R.string.SHARED_PREFS_TURISMO), Context.MODE_PRIVATE);
         userid = sharedPreferences.getInt(getString(R.string.USER_KEY), -1);
 
+        this.messageDialog = new MessageDialog(view.getContext());
+        this.loadingDialogBar = new LoadingDialogBar(view.getContext());
+
         binding.perfilButtonExit.setOnClickListener(v -> closeSession());
         this.presenter = new PerfilPresenter(this);
-        loadingDialogBar = new LoadingDialogBar(view.getContext());
         loadingDialogBar.showDialog("Cargando usuario");
         this.presenter.getUser(userid);
+        binding.perfilButtonSave.setOnClickListener(v -> saveUser());
         return view;
     }
 
@@ -66,6 +69,18 @@ public class PerfilFragment extends Fragment implements IPerfilView {
         getActivity().finish();
     }
 
+    private void saveUser(){
+        Usuario editUser = new Usuario();
+        editUser.setId(userid);
+        editUser.setApellido(binding.perfilApellido.getEditText().getText().toString());
+        editUser.setCorreo(binding.perfilCorreo.getEditText().getText().toString());
+        editUser.setNacionalidad(binding.perfilCountry.getSelectedCountryNameCode());
+        editUser.setNombre(binding.perfilNombre.getEditText().getText().toString());
+        editUser.setTelefono(binding.perfilPhone.getEditText().getText().toString());
+        loadingDialogBar.showDialog("Actualizando usuario");
+        presenter.saveUser(editUser);
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -84,5 +99,17 @@ public class PerfilFragment extends Fragment implements IPerfilView {
         loadingDialogBar.hideDialog();
         messageDialog.showDialog(msg);
 
+    }
+
+    @Override
+    public void onSaveUserSuccess(Usuario usuario) {
+        loadingDialogBar.hideDialog();
+        messageDialog.showDialog("Usuario actualizado");
+    }
+
+    @Override
+    public void onSaveUserError(String msg) {
+        loadingDialogBar.hideDialog();
+        messageDialog.showDialog(msg);
     }
 }
