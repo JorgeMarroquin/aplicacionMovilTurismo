@@ -231,6 +231,22 @@ public class LugarAdapter extends RecyclerView.Adapter<LugarAdapter.ViewHolder> 
 
     }
 
+    public void distanciaFilter(int distancia){
+        if(distancia == 0){
+            mLugares.clear();
+            mLugares.addAll(originalLugares);
+        }else{
+            List<Lugar> list = new ArrayList<>();
+            for (Lugar i : mLugares) {
+                if (i.getDistancia() <= distancia) {
+                    list.add(i);
+                }
+            }
+            mLugares.clear();
+            mLugares.addAll(list);
+        }
+    }
+
     public void queryFilter(String query){
         if(query.matches("")){
             mLugares.clear();

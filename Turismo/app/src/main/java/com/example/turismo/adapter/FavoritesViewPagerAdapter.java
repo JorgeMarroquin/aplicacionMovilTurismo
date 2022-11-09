@@ -19,9 +19,9 @@ public class FavoritesViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return new LugarFragment("TURISTICO", true);
+                return new LugarFragment("TURISTICO", 1, true);
             case 1:
-                return new LugarFragment("RESTAURANTE", true);
+                return new LugarFragment("RESTAURANTE", 1, true);
             default:
                 return null;
         }
