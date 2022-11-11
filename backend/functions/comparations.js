@@ -8,4 +8,14 @@ const compareByNombre = ( a, b ) => {
     return 0;
   }
 
-module.exports = {compareByNombre}
+const compareByDistancia = ( a, b ) => {
+    if ( Number(a.distancia )< Number(b.distancia) ){
+      return -1;
+    }
+    if ( Number(a.distancia) > Number(b.distancia) ){
+      return 1;
+    }
+    return 0;
+  }
+
+module.exports = {compareByNombre, compareByDistancia}

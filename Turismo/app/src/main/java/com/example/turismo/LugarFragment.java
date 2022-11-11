@@ -28,9 +28,15 @@ import com.example.turismo.api.ApiClient;
 import com.example.turismo.databinding.FragmentLugarBinding;
 import com.example.turismo.interfaces.LugaresAPI;
 import com.example.turismo.models.Lugar;
+import com.example.turismo.models.Message;
+import com.example.turismo.tools.MessageDialog;
+import com.google.android.gms.location.CurrentLocationRequest;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
+import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnTokenCanceledListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,10 +98,14 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
         ArrayAdapter<CharSequence> dropdownAdapter = ArrayAdapter.createFromResource(view.getContext(), (configuracion == 2) ? R.array.sortDistance : R.array.sortTypes, android.R.layout.simple_spinner_item);
         binding.sortList.setAdapter(dropdownAdapter);
 
+        if(configuracion == 2){
+            getLocation();
+            binding.searchField.setVisibility(View.INVISIBLE);
+        }else{
+            loadLugares();
+        }
         binding.searchField.setOnQueryTextListener(this);
         binding.sortList.setOnItemSelectedListener(this);
-
-        loadLugares();
 
         return view;
     }
@@ -110,6 +120,7 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
             public void onResponse(@NonNull Call<List<Lugar>> call, @NonNull Response<List<Lugar>> response) {
                 mLugares = response.body();
                 adapter.reloadData(mLugares);
+                binding.itemCount.setText("Lugares totales: " + adapter.getItemCount());
             }
             @Override
             public void onFailure(@NonNull Call<List<Lugar>> call, @NonNull Throwable t) {
@@ -124,7 +135,6 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
                 getLugares(mApi.getUserFavorites(typePlaceQuery, userid));
                 break;
             case 2:
-                getLocation();
                 if(location != null){
                     getLugares(mApi.getLugaresDistancia(typePlaceQuery, userid, location.getLatitude(), location.getLongitude()));
                 }
@@ -136,7 +146,6 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
     }
 
     private void getLocation(){
-        List<Location> result = new ArrayList<>();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(binding.getRoot().getContext());
         if (ActivityCompat.checkSelfPermission(binding.getRoot().getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(binding.getRoot().getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
@@ -145,11 +154,24 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
                     2
             );
         }
-        fusedLocationClient.getLastLocation()
+
+        fusedLocationClient.getCurrentLocation(Priority.PRIORITY_LOW_POWER, new CancellationToken() {
+                    @NonNull
+                    @Override
+                    public CancellationToken onCanceledRequested(@NonNull OnTokenCanceledListener onTokenCanceledListener) {
+                        return null;
+                    }
+
+                    @Override
+                    public boolean isCancellationRequested() {
+                        return false;
+                    }
+                })
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location lastLocation) {
                         location = lastLocation;
+                        loadLugares();
                     }
                 });
 
@@ -177,6 +199,7 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
     public boolean onQueryTextChange(String newText) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             adapter.queryFilter(newText);
+            binding.itemCount.setText("Lugares totales: " + adapter.getItemCount());
         }
         return false;
     }
@@ -184,11 +207,13 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         if(configuracion == 2){
-            adapter.sortOptions(i);
+            String selected = adapterView.getItemAtPosition(i).toString();
+            adapter.distanciaFilter((i == 0) ? 0 : Integer.parseInt(selected.substring(0, selected.length() - 3)));
         }else{
             adapter.sortOptions(i);
             binding.lugaresList.scrollToPosition(0);
         }
+        binding.itemCount.setText("Lugares totales: " + adapter.getItemCount());
     }
 
     @Override

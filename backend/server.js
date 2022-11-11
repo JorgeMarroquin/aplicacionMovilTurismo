@@ -4,8 +4,10 @@ const { PrismaClient } = require("@prisma/client")
 const prisma = new PrismaClient()
 const app = express()
 
-const {compareByNombre} = require("./functions/comparations")
+const {compareByNombre, compareByDistancia} = require("./functions/comparations")
 const {getUserFavoritesId, getSeparatedFavorites} = require("./functions/favorites")
+const {getAllLugares} = require("./functions/lugares")
+const {getKilometros} = require("./functions/tools")
 
 app.use(express.json())
 
@@ -101,7 +103,6 @@ app.get("/getUserById/:id", async(req, res) => {
 app.put(`/updateUser`, async(req, res)=>{
     
     try{
-        console.log("hola")
         const {id} = req.body
         const {nombre, apellido, correo, nacionalidad, telefono} = req.body
         const post = await prisma.usuarios.update({
@@ -121,39 +122,20 @@ app.put(`/updateUser`, async(req, res)=>{
 //LUGARES
 app.get("/getLugares/:tipo/:user", async(req, res) => {
     let params = req.params
-    let userfavs = await getUserFavoritesId(Number(params.user))
+    let result = await getAllLugares(params.user, params.tipo)
+    result.sort(compareByNombre)
+    res.json(result)
+})
 
-    const lugares = await prisma.lugares.findMany({
-        where: {
-            tipoLugar: params.tipo
-        },
-        include:{
-            visitas: {
-                where: {
-                    usuarioId: Number(params.user)
-                },
-                select:{
-                    visitaFecha: true
-                }
-            }
-        }
-    })
+app.get("/getLugaresDistancia/:type/:userid/:latitud/:longitud", async(req, res) => {
+    let params = req.params
+    let lugares = await getAllLugares(params.userid, params.type)
+    
     let result = lugares.map(l => {
-        if(l["visitas"].length > 0){
-            l["visitaFecha"] = l["visitas"][0].visitaFecha
-        }else{
-            l["visitaFecha"] = null
-        }
-        delete l["visitas"]
-        
-        if(userfavs.includes(l.id)){
-            l["isFavorite"] = true
-        }else{
-            l["isFavorite"] = false
-        }
+        l.distancia = getKilometros(Number(params.latitud), Number(params.longitud), Number(l.latitud), Number(l.longitud))
         return l
     })
-    result.sort(compareByNombre)
+    result.sort(compareByDistancia)
     res.json(result)
 })
 

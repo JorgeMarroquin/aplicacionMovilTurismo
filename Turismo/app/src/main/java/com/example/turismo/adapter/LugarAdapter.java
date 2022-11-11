@@ -25,6 +25,7 @@ import com.example.turismo.models.Lugar;
 import com.example.turismo.models.Message;
 import com.example.turismo.tools.CustomDateFormat;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -90,6 +91,12 @@ public class LugarAdapter extends RecyclerView.Adapter<LugarAdapter.ViewHolder> 
             holder.mFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_40);
         }
 
+        if(lugar.getDistancia() == 0){
+            holder.mDistancia.setVisibility(View.INVISIBLE);
+        }else{
+            holder.mDistancia.setText(new DecimalFormat("#.0#").format(lugar.getDistancia()) + "Km");
+        }
+
         TextView lugarNameTextView = holder.mLugarName;
         lugarNameTextView.setText(lugar.getNombre());
         TextView lugarDepartamento = holder.mLugarDepartamento;
@@ -150,14 +157,6 @@ public class LugarAdapter extends RecyclerView.Adapter<LugarAdapter.ViewHolder> 
         });
     }
 
-    public List<Lugar> getFilteredLugares(List<Lugar> fooList) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return fooList.stream().filter(f -> !f.getFavorite()).collect(Collectors.toList());
-        }else{
-            return fooList;
-        }
-    }
-
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private int lugarId;
@@ -168,6 +167,7 @@ public class LugarAdapter extends RecyclerView.Adapter<LugarAdapter.ViewHolder> 
         private ImageView mFavorite;
         private TextView mFecha;
         private TextView mTitleFecha;
+        private TextView mDistancia;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -179,6 +179,7 @@ public class LugarAdapter extends RecyclerView.Adapter<LugarAdapter.ViewHolder> 
             mFavorite = itemView.findViewById(R.id.favorite_indicator);
             mFecha = itemView.findViewById(R.id.lugar_fecha_visita);
             mTitleFecha = itemView.findViewById(R.id.lugar_titulo_fecha);
+            mDistancia = itemView.findViewById(R.id.lugar_distancia);
             itemView.setOnClickListener(this);
         }
 
@@ -236,15 +237,16 @@ public class LugarAdapter extends RecyclerView.Adapter<LugarAdapter.ViewHolder> 
             mLugares.clear();
             mLugares.addAll(originalLugares);
         }else{
-            List<Lugar> list = new ArrayList<>();
-            for (Lugar i : mLugares) {
-                if (i.getDistancia() <= distancia) {
-                    list.add(i);
-                }
+            List<Lugar> collection;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                collection = originalLugares.stream()
+                        .filter(i -> i.getDistancia() <= distancia)
+                        .collect(Collectors.toList());
+                mLugares.clear();
+                mLugares.addAll(collection);
             }
-            mLugares.clear();
-            mLugares.addAll(list);
         }
+        notifyDataSetChanged();
     }
 
     public void queryFilter(String query){

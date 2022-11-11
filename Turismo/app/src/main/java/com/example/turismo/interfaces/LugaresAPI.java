@@ -22,7 +22,7 @@ public interface LugaresAPI {
     Call<List<Lugar>> getUserFavorites(@Path("type") String type, @Path("userid") int userId);
 
     @GET("getLugaresDistancia/{type}/{userid}/{latitud}/{longitud}")
-    Call<List<Lugar>> getLugaresDistancia(@Path("type") String type, @Path("userid") int userId, @Path("longitud") double longitud, @Path("latitud") double latitud);
+    Call<List<Lugar>> getLugaresDistancia(@Path("type") String type, @Path("userid") int userId, @Path("latitud") double latitud, @Path("longitud") double longitud);
 
     @POST("saveFav/{id}/{user}")
     Call<Message> saveFav(@Path("id") int id, @Path("user") int user);
