@@ -46,50 +46,6 @@ public class Lugar {
         this.distancia = distancia;
     }
 
-    public static Comparator<Lugar> nameAZComparator = new Comparator<Lugar>() {
-        @Override
-        public int compare(Lugar l1, Lugar l2) {
-            return l1.getNombre().compareTo(l2.getNombre());
-        }
-    };
-
-    public static Comparator<Lugar> nameZAComparator = new Comparator<Lugar>() {
-        @Override
-        public int compare(Lugar l1, Lugar l2) {
-            return l2.getNombre().compareTo(l1.getNombre());
-        }
-    };
-
-    public static Comparator<Lugar> departamentoAZComparator = new Comparator<Lugar>() {
-        @Override
-        public int compare(Lugar l1, Lugar l2) {
-            return l1.getDepartamento().compareTo(l2.getDepartamento());
-        }
-    };
-
-    public static Comparator<Lugar> departamentoZAComparator = new Comparator<Lugar>() {
-        @Override
-        public int compare(Lugar l1, Lugar l2) {
-            return l2.getDepartamento().compareTo(l1.getDepartamento());
-        }
-    };
-
-    public static Comparator<Lugar> menorPopularidad = new Comparator<Lugar>() {
-        @Override
-        public int compare(Lugar l1, Lugar l2) {
-            return Float.compare(l1.getCalificacion(), l2.getCalificacion());
-        }
-    };
-
-    public static Comparator<Lugar> mayorPopularidad = new Comparator<Lugar>() {
-        @Override
-        public int compare(Lugar l1, Lugar l2) {
-            return Float.compare(l2.getCalificacion(), l1.getCalificacion());
-        }
-    };
-
-
-
     public int getId() {
         return this.id;
     }

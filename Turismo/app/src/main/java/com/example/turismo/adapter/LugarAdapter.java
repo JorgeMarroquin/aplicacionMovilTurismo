@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,13 +43,7 @@ public class LugarAdapter extends RecyclerView.Adapter<LugarAdapter.ViewHolder> 
     private Context context;
     private LugaresAPI mApi;
     private int userid;
-    public boolean isFavorite = false;
-
-    public LugarAdapter(List<Lugar> mLugares) {
-        this.originalLugares = mLugares;
-        mLugares = new ArrayList<>();
-        mLugares.addAll(originalLugares);
-    }
+    public boolean isFavorite;
 
     public LugarAdapter(List<Lugar> mLugares, boolean isFavorite) {
         this.originalLugares = mLugares;
@@ -107,14 +100,13 @@ public class LugarAdapter extends RecyclerView.Adapter<LugarAdapter.ViewHolder> 
         ImageView lugarImagen = holder.mLugarImage;
         Glide.with(this.context).load(lugar.getImagen()).into(lugarImagen);
         holder.mFavorite.setOnClickListener(View -> {
-            int tempPosition = position;
             if (lugar.getFavorite()){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
                 builder.setCancelable(true);
                 builder.setTitle("Eliminar de favoritos");
                 builder.setMessage("Desea eliminar de favoritos?");
                 builder.setPositiveButton("Eliminar",
-                        (dialog, which) -> onChangeFav(mApi.deleteFav(lugar.getId(), userid), tempPosition));
+                        (dialog, which) -> onChangeFav(mApi.deleteFav(lugar.getId(), userid), position));
                 builder.setNegativeButton("Cancelar", (dialog, which) -> {});
                 AlertDialog dialog = builder.create();
                 dialog.show();
@@ -160,14 +152,14 @@ public class LugarAdapter extends RecyclerView.Adapter<LugarAdapter.ViewHolder> 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private int lugarId;
-        private ImageView mLugarImage;
-        private TextView mLugarName;
-        private TextView mLugarDepartamento;
-        private RatingBar mRatingBar;
-        private ImageView mFavorite;
-        private TextView mFecha;
-        private TextView mTitleFecha;
-        private TextView mDistancia;
+        private final ImageView mLugarImage;
+        private final TextView mLugarName;
+        private final TextView mLugarDepartamento;
+        private final RatingBar mRatingBar;
+        private final ImageView mFavorite;
+        private final TextView mFecha;
+        private final TextView mTitleFecha;
+        private final TextView mDistancia;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -198,35 +190,57 @@ public class LugarAdapter extends RecyclerView.Adapter<LugarAdapter.ViewHolder> 
     public void sortOptions(int i){
         switch (i){
             case 0:
-                Collections.sort(mLugares, Lugar.nameAZComparator);
+                Collections.sort(mLugares, (l1, l2) -> l1.getNombre().compareTo(l2.getNombre()));
                 break;
             case 1:
-                Collections.sort(mLugares, Lugar.nameZAComparator);
+                Collections.sort(mLugares, (l1, l2) -> l2.getNombre().compareTo(l1.getNombre()));
                 break;
             case 2:
-                Collections.sort(mLugares, Lugar.mayorPopularidad);
+                Collections.sort(mLugares, (l1, l2) -> Float.compare(l2.getCalificacion(), l1.getCalificacion()));
                 break;
             case 3:
-                Collections.sort(mLugares, Lugar.menorPopularidad);
+                Collections.sort(mLugares, (l1, l2) -> Float.compare(l1.getCalificacion(), l2.getCalificacion()));
                 break;
             case 4:
-                Collections.sort(mLugares, Lugar.departamentoAZComparator);
+                Collections.sort(mLugares, (l1, l2) -> l1.getDepartamento().compareTo(l2.getDepartamento()));
                 break;
             case 5:
-                Collections.sort(mLugares, Lugar.departamentoZAComparator);
+                Collections.sort(mLugares, (l1, l2) -> l2.getDepartamento().compareTo(l1.getDepartamento()));
                 break;
             case 6:
-                Collections.sort(mLugares, (l1, l2) -> {
-                    Calendar cal = Calendar.getInstance();
-                    cal.set(Calendar.YEAR, 1);
-                    cal.set(Calendar.MONTH, Calendar.JANUARY);
-                    cal.set(Calendar.DAY_OF_MONTH, 1);
-                    Date oldDate = cal.getTime();
+                List<Lugar> listNull = new ArrayList<>();
+                List<Lugar> listDate = new ArrayList<>();
+                for (Lugar lugar : mLugares) {
+                    if (lugar.getVisitaFecha() == null) {
+                        listNull.add(lugar);
+                    }else{
+                        listDate.add(lugar);
+                    }
+                }
 
-                    Date date1 = l1.getVisitaFecha() == null ? oldDate : l1.getVisitaFecha();
-                    Date date2 = l2.getVisitaFecha() == null ? oldDate : l2.getVisitaFecha();
-                    return date2.compareTo(date1);
-                });
+                Collections.sort(listDate, (l1, l2) -> l2.getVisitaFecha().compareTo(l1.getVisitaFecha()));
+                listDate.addAll(listNull);
+
+                mLugares.clear();
+                mLugares.addAll(listDate);
+                break;
+            case 7:
+                List<Lugar> listNull2 = new ArrayList<>();
+                List<Lugar> listDate2 = new ArrayList<>();
+                for (Lugar lugar : mLugares) {
+                    if (lugar.getVisitaFecha() == null) {
+                        listNull2.add(lugar);
+                    }else{
+                        listDate2.add(lugar);
+                    }
+                }
+
+                Collections.sort(listDate2, (l1, l2) -> l1.getVisitaFecha().compareTo(l2.getVisitaFecha()));
+                listDate2.addAll(listNull2);
+
+                mLugares.clear();
+                mLugares.addAll(listDate2);
+                break;
             }
         notifyDataSetChanged();
 

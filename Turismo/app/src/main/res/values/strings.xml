@@ -15,7 +15,8 @@
         <item>Menor pupularidad</item>
         <item>Departamento A->Z</item>
         <item>Departamento Z->A</item>
-        <item>Fecha de visita</item>
+        <item>Visita mas reciente</item>
+        <item>Visita menos reciente</item>
     </string-array>
 
     <string-array name="sortDistance">
