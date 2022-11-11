@@ -1,5 +1,6 @@
 package com.example.turismo;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.turismo.adapter.ChangePasswordAdapter;
 import com.example.turismo.databinding.FragmentLugarBinding;
 import com.example.turismo.databinding.FragmentPerfilBinding;
 import com.example.turismo.models.Usuario;
@@ -29,6 +31,7 @@ public class PerfilFragment extends Fragment implements IPerfilView {
     private LoadingDialogBar loadingDialogBar;
     private MessageDialog messageDialog;
     private int userid;
+    private ChangePasswordAdapter changePasswordAdapter;
 
     public PerfilFragment() {}
 
@@ -48,7 +51,20 @@ public class PerfilFragment extends Fragment implements IPerfilView {
         this.presenter = new PerfilPresenter(this);
         loadingDialogBar.showDialog("Cargando usuario");
         this.presenter.getUser(userid);
-        binding.perfilButtonSave.setOnClickListener(v -> saveUser());
+        binding.perfilButtonSave.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(binding.getRoot().getContext());
+            builder.setCancelable(true);
+            builder.setTitle("Guardar cambios");
+            builder.setMessage("Desea guardar los cambios?");
+            builder.setPositiveButton("Guardar",
+                    (dialog, which) -> saveUser());
+            builder.setNegativeButton("Cancelar", (dialog, which) -> {});
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        });
+        binding.perfilButtonChangePassword.setOnClickListener(v -> {
+            changePasswordAdapter.showDialog();
+        });
         return view;
     }
 
@@ -58,6 +74,7 @@ public class PerfilFragment extends Fragment implements IPerfilView {
         binding.perfilCountry.setCountryForNameCode(usuario.getNacionalidad());
         binding.perfilNombre.getEditText().setText(usuario.getNombre());
         binding.perfilPhone.getEditText().setText(usuario.getTelefono());
+        changePasswordAdapter = new ChangePasswordAdapter(binding.getRoot().getContext(), usuario.getPassword(), usuario.getId());
     }
 
     private void closeSession(){

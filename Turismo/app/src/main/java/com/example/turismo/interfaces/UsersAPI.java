@@ -1,5 +1,6 @@
 package com.example.turismo.interfaces;
 
+import com.example.turismo.models.Message;
 import com.example.turismo.models.Usuario;
 
 import retrofit2.Call;
@@ -21,4 +22,7 @@ public interface UsersAPI {
 
     @PUT("updateUser")
     Call<Usuario> updateUser(@Body Usuario usuario);
+
+    @PUT("changePassword/{userId}/{password}")
+    Call<Message> changePassword(@Path("userId") int userId, @Path("password") String password);
 }

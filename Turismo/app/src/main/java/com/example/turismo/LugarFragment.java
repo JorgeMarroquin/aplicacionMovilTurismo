@@ -155,7 +155,7 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
             );
         }
 
-        fusedLocationClient.getCurrentLocation(Priority.PRIORITY_LOW_POWER, new CancellationToken() {
+        fusedLocationClient./*getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY, new CancellationToken() {
                     @NonNull
                     @Override
                     public CancellationToken onCanceledRequested(@NonNull OnTokenCanceledListener onTokenCanceledListener) {
@@ -166,8 +166,8 @@ public class LugarFragment extends Fragment implements SearchView.OnQueryTextLis
                     public boolean isCancellationRequested() {
                         return false;
                     }
-                })
-                .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                })*/
+                getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location lastLocation) {
                         location = lastLocation;

@@ -65,12 +65,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/perfil_name_container"
         android:hint="Correo"
+        android:enabled="false"
         app:startIconDrawable="@drawable/login_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,6 +116,8 @@
         app:layout_constraintTop_toBottomOf="@id/perfil_phone"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
+        app:icon="@drawable/login_password"
+        style="@style/Widget.MaterialComponents.Button.Icon"
         android:text="Cambiar contraseña"/>
 
     <Button
@@ -124,6 +126,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/perfil_button_change_password"
         android:layout_marginHorizontal="20dp"
+        app:icon="@drawable/ic_baseline_save_24"
+        style="@style/Widget.MaterialComponents.Button.Icon"
         android:text="Guardar cambios"/>
 
     <Button
@@ -132,6 +136,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/perfil_button_save"
         android:layout_marginHorizontal="20dp"
+        app:icon = "@drawable/ic_baseline_exit_to_app_24"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
         android:layout_marginTop="10dp"
         android:text="Cerrar sesión"/>

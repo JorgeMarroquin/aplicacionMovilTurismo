@@ -119,6 +119,22 @@ app.put(`/updateUser`, async(req, res)=>{
     
 })
 
+app.put(`/changePassword/:userId/:password`, async(req, res)=>{
+    let params = req.params
+    try{
+        const post = await prisma.usuarios.update({
+            where: {id: Number(params.userId)},
+            data: {password: params.password}
+        })
+        res.json({msg: "Contraseña actualizada"})
+    }catch{
+        console.log("Error al actualizar contraseña")
+        res.status(409)
+        res.json(null)
+    }
+       
+})
+
 //LUGARES
 app.get("/getLugares/:tipo/:user", async(req, res) => {
     let params = req.params
@@ -129,6 +145,7 @@ app.get("/getLugares/:tipo/:user", async(req, res) => {
 
 app.get("/getLugaresDistancia/:type/:userid/:latitud/:longitud", async(req, res) => {
     let params = req.params
+    console.log(Number(params.latitud), Number(params.longitud))
     let lugares = await getAllLugares(params.userid, params.type)
     
     let result = lugares.map(l => {
