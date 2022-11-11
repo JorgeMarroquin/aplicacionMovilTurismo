@@ -15,6 +15,7 @@ public class Lugar {
     private Float calificacion;
     private Boolean isFavorite = false;
     private Date visitaFecha;
+    private double distancia = 0;
 
     public Lugar() {}
 
@@ -30,7 +31,7 @@ public class Lugar {
         this.calificacion = calificacion;
     }
 
-    public Lugar(int id, String nombre, String descripcion, TipoLugar tipoLugar, String departamento, Float latitud, Float longitud, String imagen, Float calificacion, Boolean isFavorite, Date visitaFecha) {
+    public Lugar(int id, String nombre, String descripcion, TipoLugar tipoLugar, String departamento, Float latitud, Float longitud, String imagen, Float calificacion, Boolean isFavorite, Date visitaFecha, double distancia) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -42,51 +43,8 @@ public class Lugar {
         this.calificacion = calificacion;
         this.isFavorite = isFavorite;
         this.visitaFecha = visitaFecha;
+        this.distancia = distancia;
     }
-
-    public static Comparator<Lugar> nameAZComparator = new Comparator<Lugar>() {
-        @Override
-        public int compare(Lugar l1, Lugar l2) {
-            return l1.getNombre().compareTo(l2.getNombre());
-        }
-    };
-
-    public static Comparator<Lugar> nameZAComparator = new Comparator<Lugar>() {
-        @Override
-        public int compare(Lugar l1, Lugar l2) {
-            return l2.getNombre().compareTo(l1.getNombre());
-        }
-    };
-
-    public static Comparator<Lugar> departamentoAZComparator = new Comparator<Lugar>() {
-        @Override
-        public int compare(Lugar l1, Lugar l2) {
-            return l1.getDepartamento().compareTo(l2.getDepartamento());
-        }
-    };
-
-    public static Comparator<Lugar> departamentoZAComparator = new Comparator<Lugar>() {
-        @Override
-        public int compare(Lugar l1, Lugar l2) {
-            return l2.getDepartamento().compareTo(l1.getDepartamento());
-        }
-    };
-
-    public static Comparator<Lugar> menorPopularidad = new Comparator<Lugar>() {
-        @Override
-        public int compare(Lugar l1, Lugar l2) {
-            return Float.compare(l1.getCalificacion(), l2.getCalificacion());
-        }
-    };
-
-    public static Comparator<Lugar> mayorPopularidad = new Comparator<Lugar>() {
-        @Override
-        public int compare(Lugar l1, Lugar l2) {
-            return Float.compare(l2.getCalificacion(), l1.getCalificacion());
-        }
-    };
-
-
 
     public int getId() {
         return this.id;
@@ -170,5 +128,13 @@ public class Lugar {
 
     public void setVisitaFecha(Date visitaFecha) {
         this.visitaFecha = visitaFecha;
+    }
+
+    public double getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(double distancia) {
+        this.distancia = distancia;
     }
 }

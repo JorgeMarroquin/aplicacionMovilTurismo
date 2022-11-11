@@ -2,15 +2,12 @@ package com.example.turismo.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.turismo.LugarFragment;
 
-public class FavoritesViewPagerAdapter extends FragmentStateAdapter {
-
-
-    public FavoritesViewPagerAdapter(@NonNull Fragment fragment) {
+public class CercaViewPagerAdapter extends FragmentStateAdapter {
+    public CercaViewPagerAdapter(@NonNull Fragment fragment) {
         super(fragment);
     }
 
@@ -19,9 +16,9 @@ public class FavoritesViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return new LugarFragment("TURISTICO", 1, true);
+                return new LugarFragment("TURISTICO", 2);
             case 1:
-                return new LugarFragment("RESTAURANTE", 1, true);
+                return new LugarFragment("RESTAURANTE", 2);
             default:
                 return null;
         }

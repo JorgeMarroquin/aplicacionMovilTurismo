@@ -87,6 +87,18 @@
                 android:layout_marginBottom="15dp"
                 app:layout_constraintStart_toStartOf="parent"/>
 
+            <TextView
+                android:id="@+id/lugar_distancia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/rating_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="100 KM"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
             <RatingBar
                 android:id="@+id/rating_bar"
                 android:isIndicator="true"

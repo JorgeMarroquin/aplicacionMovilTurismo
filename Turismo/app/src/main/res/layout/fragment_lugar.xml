@@ -31,19 +31,25 @@
             android:layoutDirection="rtl"
             android:layout_weight="1"/>
 
-        <ImageView
-            android:id="@+id/close_session_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_baseline_power_settings_new_24"/>
-
     </LinearLayout>
 
-
+    <TextView
+        android:id="@+id/item_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/linear_searchBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingBottom="10dp"
+        android:text="Lugares totales: 0"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:layout_margin="10dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lugares_list"
-        app:layout_constraintTop_toBottomOf="@id/linear_searchBar"
+        app:layout_constraintTop_toBottomOf="@id/item_count"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="0dp" />

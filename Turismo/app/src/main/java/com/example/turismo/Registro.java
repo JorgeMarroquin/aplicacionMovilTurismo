@@ -3,6 +3,7 @@ package com.example.turismo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +37,7 @@ public class Registro extends AppCompatActivity {
         messageDialog = new MessageDialog(this);
 
         binding.buttonRegister.setOnClickListener(v -> {
-
+            Toast.makeText(this, binding.country.getSelectedCountryNameCode(), Toast.LENGTH_SHORT).show();
             String hashPassword = null; try {
                 hashPassword = AESCrypt.encrypt(binding.password.getText().toString());
             } catch (Exception e) {
@@ -49,7 +50,7 @@ public class Registro extends AppCompatActivity {
                     binding.lastName.getText().toString(),
                     binding.email.getText().toString(),
                     finalHashPassword,
-                    binding.country.getSelectedCountryName(),
+                    binding.country.getSelectedCountryNameCode(),
                     binding.phone.getText().toString());
 
             if(nuevoUsuario.emptyFields()){

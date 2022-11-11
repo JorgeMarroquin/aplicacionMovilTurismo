@@ -15,7 +15,17 @@
         <item>Menor pupularidad</item>
         <item>Departamento A->Z</item>
         <item>Departamento Z->A</item>
-        <item>Fecha de visita</item>
+        <item>Visita mas reciente</item>
+        <item>Visita menos reciente</item>
+    </string-array>
+
+    <string-array name="sortDistance">
+        <item>Todos</item>
+        <item>5 Km</item>
+        <item>10 Km</item>
+        <item>20 Km</item>
+        <item>50 Km</item>
+        <item>100 Km</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

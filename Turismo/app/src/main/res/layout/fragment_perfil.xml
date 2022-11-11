@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PerfilFragment">
+
+    <ImageView
+        android:id="@+id/perfil_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_baseline_account_circle_60"
+        android:contentDescription="Solo una imagen" />
+
+    <LinearLayout
+        android:id="@+id/perfil_name_container"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintTop_toBottomOf="@id/perfil_image"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:baselineAligned="false">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/perfil_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"
+            android:layout_weight="1"
+            android:layout_marginEnd="2dp"
+            app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/perfil_apellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Apellido"
+            android:layout_weight="1"
+            android:layout_marginStart="2dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/perfil_correo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/perfil_name_container"
+        android:hint="Correo"
+        android:enabled="false"
+        app:startIconDrawable="@drawable/login_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/perfil_country"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/perfil_correo"
+        app:ccp_showFullName="true"
+        app:ccp_showPhoneCode="false"
+        app:ccp_showNameCode="false"
+        app:ccp_autoDetectLanguage="true"
+        app:ccp_defaultNameCode="GT"
+        app:ccp_textGravity="LEFT"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/perfil_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/perfil_country"
+        android:hint="Teléfono"
+        app:startIconDrawable="@drawable/ic_phone_24"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:digits="0123456789"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/perfil_button_change_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/perfil_phone"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        app:icon="@drawable/login_password"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:text="Cambiar contraseña"/>
+
+    <Button
+        android:id="@+id/perfil_button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/perfil_button_change_password"
+        android:layout_marginHorizontal="20dp"
+        app:icon="@drawable/ic_baseline_save_24"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:text="Guardar cambios"/>
+
+    <Button
+        android:id="@+id/perfil_button_exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/perfil_button_save"
+        android:layout_marginHorizontal="20dp"
+        app:icon = "@drawable/ic_baseline_exit_to_app_24"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+        android:layout_marginTop="10dp"
+        android:text="Cerrar sesión"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
